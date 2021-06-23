@@ -1,0 +1,38 @@
+vector<ll>gr[100005];
+ll vis[10005];
+bool oddcycle=0;
+void dfs(ll cur,ll par,ll col)
+{
+    vis[cur]=col;
+    for(auto child: gr[cur])
+    {
+        if(vis[child]==0)
+        dfs(child,cur,3-col);
+        else if(child!=par && col==vis[child])
+        {
+            oddcycle=1;
+        }
+    }
+}
+ 
+ 
+ 
+ 
+ de(n);
+        de(m);
+        re(i,m)
+        {
+            de(x);
+            de(y);
+            gr[x].pb(y);
+            gr[y].pb(x);
+        }
+        dfs(1,0,1);
+        if(oddcycle)
+        {
+            cout<<"NO\n";
+        }
+        else
+        {
+            cout<<"YES\n";
+        }

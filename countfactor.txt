@@ -1,0 +1,17 @@
+ll countfactor(ll n)
+{
+    ll ans=0;
+    for(ll j=1;j*j<=n;j++)
+    {
+        if(n%j==0)
+        {
+            if(j*j==n)
+            ans++;
+            else
+            {
+                ans+=2;
+            }
+        }
+    }
+    return ans;
+}

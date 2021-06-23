@@ -1,0 +1,12 @@
+node*rightview(node*root,ll le,ll &mxl)
+{
+    if(root=NULL)
+    return ;
+    if(mxl<le)
+    {
+        cout<<root->data<<" ";
+        mxl=le;
+    }
+    rightview(root->right,le+1,mxl);
+    rightview(root->left,le+1,mxl);
+}

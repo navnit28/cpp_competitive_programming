@@ -1,0 +1,7 @@
+ll rightRotate(ll n, ll d,ll p)
+{
+    ((n >> d));
+    (((1ll << (p)) - 1));
+    ((n << (p- d)) & ((1ll << (p)) - 1));
+    return ((n >> d) | (n << (p - d))) & ((1ll << (p)) - 1);
+}

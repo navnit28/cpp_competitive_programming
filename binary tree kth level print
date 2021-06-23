@@ -1,0 +1,13 @@
+void printKthLevel(node*root,int k){
+    if(root==NULL){
+        return;
+    }
+    if(k==1){
+        cout<<root->data<<" ";
+        return;
+    }
+    printKthLevel(root->left,k-1);
+    printKthLevel(root->right,k-1);
+    return;
+
+}

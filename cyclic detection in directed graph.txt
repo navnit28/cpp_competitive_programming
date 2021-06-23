@@ -1,0 +1,30 @@
+bool containscycle(){
+    bool *visited=new bool[v];
+    bool *stack=new bool[v];
+    re(i,v)
+    visited[i]=0;
+    re(i,v)
+    stack[i]=0;
+    ll j=0;
+    return cylclehelper(j,visited,stack);
+}
+bool cylclehelper(ll node,bool *visited,bool* stack)
+{
+    visited[node]=true;
+    stack[node]=true;
+    for(ll nbr:l[node])
+    {
+        //neighbour
+        if(stack[nbr]==true)   
+        return true;
+        else if(visited[nbr]==false)
+        {
+            bool cyclemila=cylclehelper(nbr,visited,stack);
+            if(cyclemila==true)
+            return true;
+        }
+    }
+    //leave node
+    stack[node]=false;
+    return false;
+}

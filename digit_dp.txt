@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+#define ss second
+#define ll long long 
+#define ff first
+#define pll pair<ll,ll>
+#define w(x) ll x; cin>>x; while(x--)
+#define ps(x,y) fixed<<setprecision(y)<<x;
+#define fo(i, j, k, in) for (ll i=j ; i<k ; i+=in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) ll n;cin>>n;
+#define def(a,n) ll n;cin>>n;ll a[n];re(i,n){cin>>a[i];}
+#define defi(a,n,k) ll n;cin>>n; ll k;cin>>k;ll a[n];re(i,n){cin>>a[i];}
+#define deb(x) cout<<#x<<"="<<x<<endl;
+#define tr(it,a) for(auto it=a.begin();it!=a.end();it++)
+#define nl cout<<endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+    ios :: sync_with_stdio(false); cin.tie(0); cout.tie(0); 
+    #ifndef ONLINE_JUDGE  
+    freopen("input.txt", "r", stdin);  
+    freopen("output.txt", "w", stdout);
+#endif
+}
+ll dp [101][101][2];
+ll solve(string &num,ll n,ll sum,bool tight)
+{
+	if(n==1)
+	{
+		if(sum>=0&&sum<=9)
+		return 1;
+		else
+		{
+			return 0;
+		}
+	}
+	if(dp[n][sum][tight]!=-1)
+	{
+		return dp[n][sum][tight];
+	}
+	ll ans=0;
+	ll jt=9;
+	ll ub=tight ? num[num.length()-n]-'0': jt;
+	for(ll dig=0;dig<=ub;dig++)
+	{
+		ans+=solve(num,n-1,sum-dig,tight);
+	}
+	return dp[n][sum][tight]=ans;
+}
+int main()
+{
+    cp();
+    //de(n);
+	//w(x)
+	//digit dp
+	string r;
+	r+='2';
+	r+='4';
+	//memset(dp,sizeof(dp),-1);
+	re(i,101)
+	{
+		re(j,101)
+		{
+			dp[i][j][0]=-1;
+			dp[i][j][1]=-1;
+		}
+	}
+	ll ew=6;
+	ll f=1;
+	//cout<<r.length()<<endl;
+	cout<<solve(r,r.length(),ew,f);
+	nl;
+}

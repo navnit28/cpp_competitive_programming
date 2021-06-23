@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+#define ss second
+#define ll long long 
+#define mod 1000000007
+#define ff first
+#define pb push_back
+#define pll pair<ll,ll>
+#define w(x) ll x; cin>>x; while(x--)
+#define ps(x,y) fixed<<setprecision(y)<<x;
+#define fo(i, j, k, in) for (ll i=j ; i<k ; i+=in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) ll n;cin>>n;
+#define def(a,n) ll n;cin>>n;ll a[n];re(i,n){cin>>a[i];}
+#define defi(a,n,k) ll n;cin>>n; ll k;cin>>k;ll a[n];re(i,n){cin>>a[i];}
+#define deb(x) cout<<#x<<"="<<x<<endl;
+#define tr(it,a) for(auto it=a.begin();it!=a.end();it++)
+#define nl cout<<endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+    ios :: sync_with_stdio(false); cin.tie(0); cout.tie(0); 
+    #ifndef ONLINE_JUDGE  
+    freopen("input.txt", "r", stdin);  
+    freopen("output.txt", "w", stdout);
+#endif
+}
+vector<pair<ll,ll>> adj[1001];
+int main()
+{
+    cp();
+    //w(x)
+    {
+        de(n);
+        de(m);
+        re(i,m)
+        {
+            de(x);
+            de(y);
+            de(w);
+            adj[x].push_back({y,w});
+            //adj[y].push_back({x,w});
+        }
+        set<pair<ll,ll>>s;
+        ll h=0;
+        s.insert({h,h});
+        ll dis[n+1];
+        for(ll i=0;i<n+1;i++)
+        dis[i]=INT_MAX;
+        dis[h]=0;
+        while(!s.empty())
+        {
+            auto cur=*(s.begin());
+            s.erase(s.begin());
+            for(auto nb:adj[cur.second])
+            {
+                ll j=cur.first;
+                ll k=nb.second;
+                ll gt=dis[nb.first];
+                if(cur.first+nb.second<dis[nb.first])
+                {
+                    auto it=s.find({nb.first,dis[nb.first]});
+                    if(it!=s.end())
+                    s.erase(it);
+                    dis[nb.first]=cur.first+nb.second;
+                    s.insert({dis[nb.first],nb.first});
+                }
+            }
+        }
+        re(i,n)
+        {
+            cout<<dis[i+1]<<" ";
+        }
+    }
+}

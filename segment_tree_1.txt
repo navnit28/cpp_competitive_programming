@@ -1,0 +1,115 @@
+//NAVNIT28
+#include <bits/stdc++.h>
+#define ss second
+#define ll long long
+#define mod 1000000007
+#define ff first
+#define pb push_back
+#define pll pair<ll, ll>
+#define w(x)  \
+    ll x;     \
+    cin >> x; \
+    while (x--)
+#define ps(x, y) fixed << setprecision(y) << x;
+#define fo(i, j, k, in) for (ll i = j; i < k; i += in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) \
+    ll n;     \
+    cin >> n;
+#define def(a, n) \
+    ll n;         \
+    cin >> n;     \
+    ll a[n];      \
+    re(i, n) { cin >> a[i]; }
+#define defi(a, n, k) \
+    ll n;             \
+    cin >> n;         \
+    ll k;             \
+    cin >> k;         \
+    ll a[n];          \
+    re(i, n) { cin >> a[i]; }
+#define deb(x) cout << #x << "=" << x << endl;
+#define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
+#define nl cout << endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+    ios ::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+}
+ll maxn = 800002;
+#define INF INT_MAX
+vector<ll> t(maxn, 0), lazy(maxn, 0);
+void push(ll v) {
+  t[v * 2] += lazy[v];
+  lazy[v * 2] += lazy[v];
+  t[v * 2 + 1] += lazy[v];
+  lazy[v * 2 + 1] += lazy[v];
+  lazy[v] = 0;
+}
+ 
+void update(ll v, ll tl, ll tr, ll l, ll r, ll addend) {
+  if (l > r)
+    return;
+  if (l == tl && tr == r) {
+    t[v] += addend;
+    lazy[v] += addend;
+  } else {
+    push(v);
+    ll tm = (tl + tr) / 2;
+    update(v * 2, tl, tm, l, min(r, tm), addend);
+    update(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r, addend);
+    t[v] = min(t[v * 2], t[v * 2 + 1]);
+  }
+}
+ 
+ll query(ll v, ll tl, ll tr, ll l, ll r) {
+  if (l > r)
+    return INF;
+  if (l <= tl && tr <= r)
+    return t[v];
+  push(v);
+  ll tm = (tl + tr) / 2;
+  return min(query(v * 2, tl, tm, l, min(r, tm)),
+             query(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r));
+}
+int main()
+{
+    cp();
+     ll n;
+  cin >> n;
+  vector<ll> vec(n), pref(n + 1);
+  ll ans = 0;
+  vector<pair<ll, ll> > pr;
+  for (ll i = 0; i < n; i++)
+  {
+    cin >> vec[i];
+    if (vec[i] >= 0) {pref[i + 1] = pref[i] + vec[i]; ans++;}
+    else {
+      pref[i + 1] = pref[i];
+      pr.push_back({abs(vec[i]), i});
+    }
+    update(1, 0, n, i + 1, i + 1, pref[i + 1]);
+  }
+  sort(pr.begin(), pr.end());
+  ll i = 0, sz = pr.size();
+  while (i < sz)
+  {
+    ll id = pr[i].ss, val = (-1) * pr[i].ff;
+    update(1, 0, n, id + 1, n, val);
+    ll ng = query(1, 0, n, 0, n);
+    if (ng < 0) update(1, 0, n, id + 1, n, pr[i].ff);
+    else ans++;
+    i++;
+  }
+  cout << ans << "\n";
+}

@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+#define ss second
+#define ll long long 
+#define mod 1000000007
+#define ff first
+#define pb push_back
+#define pll pair<ll,ll>
+#define w(x) ll x; cin>>x; while(x--)
+#define ps(x,y) fixed<<setprecision(y)<<x;
+#define fo(i, j, k, in) for (ll i=j ; i<k ; i+=in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) ll n;cin>>n;
+#define def(a,n) ll n;cin>>n;ll a[n];re(i,n){cin>>a[i];}
+#define defi(a,n,k) ll n;cin>>n; ll k;cin>>k;ll a[n];re(i,n){cin>>a[i];}
+#define deb(x) cout<<#x<<"="<<x<<endl;
+#define maxl 10000001
+#define tr(it,a) for(auto it=a.begin();it!=a.end();it++)
+#define nl cout<<endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+     ios :: sync_with_stdio(false); cin.tie(0); cout.tie(0); 
+    #ifndef ONLINE_JUDGE  
+    freopen("input.txt", "r", stdin);  
+    freopen("output.txt", "w", stdout);
+#endif
+}
+pair<pair<ll,ll>,ll> gcdextented(ll a,ll b)
+{
+    if(b==0)
+    {
+        pair<pair<ll,ll>,ll> ans;
+        ans.second=a;
+        ans.first.first=1;
+        ans.first.second=0;
+        return ans;
+    }
+    pair<pair<ll,ll>,ll> temp=gcdextented(b,a%b);
+    pair<pair<ll,ll>,ll> ans;
+    ans.second=temp.second;
+    ans.first.first=temp.first.second;
+    ans.first.second=(temp.first.first-((a/b)*temp.first.second));
+    return ans;
+}
+ll modinverse1(ll a,ll b)
+{
+    pair<pair<ll,ll>,ll>ans;
+    ans=gcdextented(a,b);
+    ll k=ans.first.first;
+    return (k+b)%b;
+}
+int main()
+{
+    cp();
+    w(x)
+    {
+        de(a);
+        de(b);
+        de(d);
+        ll g=__gcd(a,b);
+        if(d==0)
+        {
+            cout<<"1";
+        }
+        else if(d%g!=0)
+        {
+            cout<<"0";
+        }
+        else{
+            ll min_y=((d%a)*modinverse1(b,a))%a;
+            ll temp=(d/b);
+            if(d<min_y*b)
+            {
+                cout<<"0";
+            }
+            else{
+            ll n=(temp-min_y)/a;
+            cout<<n+1;
+            }
+        }
+        nl;
+    }
+}

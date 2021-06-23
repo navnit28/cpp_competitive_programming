@@ -1,0 +1,53 @@
+list<pair<ll,ll>> *l;
+    de(n);
+    l=new list<pair<ll,ll>>[n];
+    de(e);
+    re(i,e)
+    {
+        de(x);
+        de(y);
+        de(wt);
+        l[x].pb(mk(y,wt));
+        l[y].pb(mk(x,wt));
+
+    }
+    re(i,n)
+    {
+        cout<<"LINKEDLIST"<<" "<<i<<" ";
+        for(auto s:l[i])
+        {
+            cout<<"("<<s.ff<<","<<s.ss<<")";
+        }
+        cout<<endl;
+    }
+
+
+
+
+    class graph
+{
+    unordered_map <string,list<pair<string,ll> >> l;
+    public:
+    void add(string x,string y,bool f,ll wt)
+    {
+        l[x].pb(mk(y,wt));
+        if(f==1)
+        l[y].pb(mk(x,wt));
+    }
+    void print()
+    {
+        for(auto p: l)
+        {
+            string city =p.ff;
+            cout<<city<<"->";
+            list<pair<string,ll>> nb =p.ss;
+            for(auto k:nb)
+            {
+                string d=k.ff;
+                ll distance=k.ss;
+                cout<<"("<<d<<","<<distance<<")";
+            }
+            nl;
+        }
+    }
+};

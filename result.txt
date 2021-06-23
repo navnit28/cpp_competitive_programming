@@ -1,0 +1,35 @@
+    ll ans=LLONG_MAX;
+    sort(a,a+n);
+    bool ok=0;
+    for(ll i=1;i<=1e6;i++)
+    {
+        ll an=0;
+        ll k=1;
+        re(j,n)
+        {
+          if(j==0)
+          {
+            an+=(abs(a[j]-1));
+          }
+          else
+          {
+            if(k>LLONG_MAX/i)
+            {
+              ok=1;
+              break;
+            }
+            else
+            {
+              /* code */
+            
+            k*=i;
+            an+=abs(a[j]-k);
+            }
+          }
+        }
+        if(ok==0)
+        ans=min(ans,an);
+        else
+        break;
+    }
+     cout<<ans<<endl; 

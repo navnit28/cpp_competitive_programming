@@ -1,0 +1,9 @@
+bool searchrecursive(node*head,ll key)
+{
+    if(head==NULL)
+    return false;
+    if(head->data==key)
+    return true;
+    else
+    searchrecursive(head->next,key);
+}

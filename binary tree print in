@@ -1,0 +1,9 @@
+oid printIn(node*root){
+    if(root==NULL){
+        return;
+    }
+    //Otherwise Left Root Right
+    printIn(root->left);
+    cout<<root->data<<" ";
+    printIn(root->right);
+}

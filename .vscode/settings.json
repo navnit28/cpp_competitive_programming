@@ -1,0 +1,22 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "string_view": "cpp",
+        "regex": "cpp",
+        "ostream": "cpp",
+        "color.C": "cpp",
+        "graph-coloring.C": "cpp",
+        "cmath": "cpp",
+        "ASSG5_B190404CS_NAVNIT_1.C": "cpp",
+        "ASSG6_B190404CS_NAVNIT_2.C": "cpp",
+        "iomanip": "cpp",
+        "istream": "cpp"
+    },
+    "python.pythonPath": "C:\\Python39\\python.exe",
+    "cSpell.words": [
+        "defi",
+        "xpipippixx"
+    ],
+    "compile-hero.disable-compile-files-on-did-save-code": false
+}

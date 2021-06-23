@@ -1,0 +1,49 @@
+class graph{
+    ll V;
+    list<pair<ll,ll>>*l;
+    public:
+    graph(ll v)
+    {
+        V=v;
+        l=new list<pair<ll,ll>>[V];
+    }
+    void add(ll u,ll v,ll cost)
+    {
+        l[u].pb(mk(v,cost));
+        l[v].pb(mk(u,cost));
+    }
+    ll dfshelper(ll node,bool *visited,ll *count,ll &ans)
+    {
+        //mark node as visited
+        count[node]=1;
+        visited[node]=true;
+        for(auto nbr_pair: l[node])
+        {
+            ll nbr=nbr_pair.ff;
+            ll wt=nbr_pair.ss;
+            if(!visited[nbr])
+            {
+                count[node]+=dfshelper(nbr,visited,count,ans);
+                ll nx=count[nbr];
+                ll ny=V-nx;
+                ans+=2*min(nx,ny)*wt;
+            }
+        }
+        //before returning
+        return count[node];
+    }
+    ll dfs()
+    {
+        bool *visited=new bool [V];
+        ll *count=new ll[V];
+        re(i,V)
+        {
+            visited[i]=false;
+            count[i]=0;
+        }
+        ll ans=0;
+        ll j=0;
+        dfshelper(j,visited,count,ans);
+        return ans;
+    }
+};

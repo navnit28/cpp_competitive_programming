@@ -1,0 +1,33 @@
+class Pair{
+    public:
+    ll height;
+    ll diameter;
+};
+Pair fastdiameter(node*root)
+{
+    Pair p;
+    if(root==NULL)
+    {
+        p.height=p.diameter=0;
+        return p;
+    }
+    Pair left=fastdiameter(root->left);
+    Pair right=fastdiameter(root->right);
+    p.height=max(left.height,right.height)+1;
+    p.diameter=max(left.height+right.height,max(left.diameter,right.diameter));
+    return p;
+}
+
+
+
+ll diameter(node*root)
+{
+    if(root==NULL)
+    return 0;
+    ll h1=height(root->left);
+    ll h2=height(root->right);
+    ll op1=h1+h2;
+    ll op2=diameter(root->left);
+    ll op3=diameter(root->right);
+    return max(op1,max(op2,op3));
+}

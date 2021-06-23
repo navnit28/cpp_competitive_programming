@@ -1,0 +1,15 @@
+while(r>l+1)
+		{
+			//k++;
+			ll mid=(l+r)/2;
+			if(fuc(mid,height,cost,n)>fuc(mid+1,height,cost,n))
+			{
+				l=mid;
+			}
+			else
+			{
+				r=mid;
+			}
+
+		}
+        //l+1 minimum;

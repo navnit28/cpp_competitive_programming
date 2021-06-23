@@ -1,0 +1,42 @@
+void bfslevel(int root,vector<vector<int>>&adj,int n)
+{
+  vector<int>par(n+1);
+  par[1]=0;
+  queue<int> q;
+  q.push(1);
+  while(!q.empty())
+  {
+    int cur_sz=q.size();
+    while(cur_sz--)
+    {
+      int cur=q.front();
+      q.pop();
+      cout<<cur<<" ";
+      for(int nb:adj[cur])
+      {
+        if(nb!=par[cur])
+        {
+          q.push(nb);
+          par[nb]=cur;
+        }
+      }
+    }
+    nl;
+  }
+}
+int main()
+{
+  cp();
+  //w(x)
+  {
+    de(n);
+    vector<vector<int>>adj(n+1);
+    for(int i=0;i<n-1;i++)
+    {
+      de(x);de(y);
+      adj[x].push_back(y);
+      adj[y].push_back(x);
+    }
+    bfslevel(1,adj,n);
+  }
+}

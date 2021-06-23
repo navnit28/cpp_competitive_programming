@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+#define ss second
+#define ll long long 
+#define ff first
+#define w(x) ll x; cin>>x; while(x--)
+#define ps(x,y) fixed<<setprecision(y)<<x;
+#define fo(i, j, k, in) for (ll i=j ; i<k ; i+=in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) ll n;cin>>n;
+#define def(a,n) ll n;cin>>n;ll a[n];re(i,n){cin>>a[i];}
+#define defi(a,n,k) ll n;cin>>n; ll k;cin>>k;ll a[n];re(i,n){cin>>a[i];}
+#define deb(x) cout<<#x<<"="<<x<<endl;
+#define tr(it,a) for(auto it=a.begin();it!=a.end();it++)
+#define nl cout<<endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+    ios :: sync_with_stdio(false); cin.tie(0); cout.tie(0); 
+    #ifndef ONLINE_JUDGE  
+    freopen("input.txt", "r", stdin);  
+    freopen("output.txt", "w", stdout);
+#endif
+}
+vector<pair<int,int>> adj[100005];
+int vis[100005];
+int dis[100005];
+int main()
+{
+    cp();
+	//w(x)
+    de(n);
+    de(m);
+    re(i,m)
+    {
+        de(x);
+        de(y);
+        de(z);
+        adj[x].push_back({y,z});
+        //adj[y].push_back({x,z}) ;
+    }
+    int source;
+    cin>>source;
+    set<pair<int,int>>s;
+    s.insert({0,source});
+    while(!s.empty())
+    {
+        int cur=s.begin()->second;
+        int d=s.begin()->first;
+        s.erase(s.begin());
+        if(vis[cur])
+        {
+            continue;
+        }
+        dis[cur]=d;
+        vis[cur]=1;
+        for(auto temp:adj[cur])
+        {
+            if(vis[temp.first])
+            continue;
+            s.insert({d+temp.second,temp.first});
+        }
+    }
+    for(int i=1;i<=3;i++)
+    cout<<dis[i]<<" ";
+}

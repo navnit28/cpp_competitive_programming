@@ -1,0 +1,45 @@
+class graph
+{
+    list<ll> *l;
+    int v;
+    public:
+    graph(ll v)
+    {
+        this->v=v;
+        l=new list<ll>[v];
+    }
+    void add(ll x,ll y)
+    {
+        l[x].pb(y);
+    }
+    void topological_sort()
+    {
+        ll *indegree=new ll[v];
+        re(i,v)
+        indegree[i]=0;
+        re(i,v)
+        {
+            for(auto y:l[i])
+            indegree[y]++;
+        }
+        queue<ll> q;
+        re(i,v)
+        {
+            if(indegree[i]==0)
+            q.push(i);
+        }
+        while(!q.empty())
+        {
+            ll node=q.front();
+            cout<<node<<" ";
+            q.pop();
+            for(auto nbr:l[node])
+            {
+                indegree[nbr]--;
+                if(indegree[nbr]==0)
+                q.push(nbr);
+            }
+        }
+    }
+
+};

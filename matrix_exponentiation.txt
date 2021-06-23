@@ -1,0 +1,114 @@
+//NAVNIT28
+#include <bits/stdc++.h>
+#define ss second
+#define ll long long
+#define mod 1000000007
+#define ff first
+#define pb push_back
+#define pll pair<ll, ll>
+#define w(x)  \
+    ll x;     \
+    cin >> x; \
+    while (x--)
+#define ps(x, y) fixed << setprecision(y) << x;
+#define fo(i, j, k, in) for (ll i = j; i < k; i += in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) \
+    ll n;     \
+    cin >> n;
+#define def(a, n) \
+    ll n;         \
+    cin >> n;     \
+    ll a[n];      \
+    re(i, n) { cin >> a[i]; }
+#define defi(a, n, k) \
+    ll n;             \
+    cin >> n;         \
+    ll k;             \
+    cin >> k;         \
+    ll a[n];          \
+    re(i, n) { cin >> a[i]; }
+#define deb(x) cout << #x << "=" << x << endl;
+#define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
+#define nl cout << endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+    ios ::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+}
+const ll N=100005;
+ll dp[N][2];
+ll inf=100000000000000;
+vector<vector<ll>> multi(vector<vector<ll>>&a,vector<vector<ll>>&b)
+{
+    ll n=a.size();
+    vector<vector<ll>> ans(n,vector<ll>(n,0));
+    re(i,n)
+    {
+        re(j,n)
+        {
+            re(k,n)
+            {
+                ans[i][j]=(ans[i][j]+a[i][k]*b[k][j])%mod;
+            }
+        }
+    }
+    return ans;
+}
+vector<vector<ll>> power_(vector<vector<ll>> mat,ll ex)
+{
+    if(ex==1)
+    return mat;
+    vector<vector<ll>> ans=power_(mat,ex/2);
+    vector<vector<ll>> an=multi(ans,ans);
+    if(ex%2!=0)
+    {
+        
+        return multi(an,mat);
+    }
+    else
+    {
+        return an;
+    }
+
+}
+int main()
+{
+    cp();
+    //sieve();
+    //w(x)
+    //de(n);
+    de(n);
+    de(k);
+    vector<vector<ll>>ans(n,vector<ll> (n));
+    vector<vector<ll>> an;
+    for(ll i=0;i<n;i++)
+    {
+        for(ll j=0;j<n;j++)
+        {
+            cin>>ans[i][j];
+        }
+    }
+    an=power_(ans,k);
+    ll an1=0;
+    re(i,n)
+    {
+        re(j,n)
+        {
+            //cout<<an[i][j]<<" ";
+            an1=(an1%mod+(an[i][j])%mod)%mod;
+        }
+        //nl;
+    }
+    cout<<an1;
+}

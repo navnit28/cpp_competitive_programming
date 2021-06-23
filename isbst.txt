@@ -1,0 +1,11 @@
+bool isbst(node* root,ll mi=INT_MIN,ll mx=INT_MAX)
+{
+    if(root==NULL)
+    return true;
+    if(root->data>=mi&&root->data<=mx&&isbst(root->left,mi,root->dat)&&isbst(root,root->data,mx))
+    cout<<"YES\n";
+    else
+    {
+        cout<<"NO\n";
+    }
+}

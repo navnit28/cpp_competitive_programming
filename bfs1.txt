@@ -1,0 +1,21 @@
+bool vis[n+1]={0};
+        ll dis[n+1];
+        queue<ll>q;
+        q.push(a);
+        vis[a]=1;
+        dis[a]=0;
+        map<pair<ll,ll>,ll>we;
+        while(!q.empty())
+        {
+            ll cur_node=q.front();
+            q.pop();
+            for(auto nb:adj[cur_node])
+            {
+                if(vis[nb]==0)
+                {
+                    q.push(nb);
+                    vis[nb]=1;
+                    dis[nb]=dis[cur_node]+1;
+                }
+            }
+        }

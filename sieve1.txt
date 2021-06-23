@@ -1,0 +1,23 @@
+vector<ll> pr;
+
+const ll n=15000001;
+bool prime [n]; 
+void sieve() 
+{
+    //memset(prime, true, sizeof(prime)); 
+    for (ll p=2; p*p<=n; p++) 
+    {
+        if (prime[p] ==0) 
+        {  
+            for (ll i=p*p; i<=n; i += p) 
+                prime[i] = 1; 
+        } 
+    }
+   
+    for (ll p=2; p<=n; p++) 
+       if (prime[p]==0) 
+        {
+            pr.pb(p);
+        }
+       // return pr;
+} 

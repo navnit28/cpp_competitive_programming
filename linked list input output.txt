@@ -1,0 +1,11 @@
+
+istream& operator>>(istream &is,node*&head)
+{
+    buildlist(head);
+    return is;
+}
+ostream& operator<<(ostream &os,node*&head)
+{
+    print(head);
+    return os;
+}

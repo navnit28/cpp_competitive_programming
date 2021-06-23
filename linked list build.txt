@@ -1,0 +1,10 @@
+void buildlinkedlist(node*&head)
+{
+    ll data;
+    cin>>data;
+    while(data!=-1)
+    {
+        insertattail(head,data);
+        cin>>data;
+    }
+}

@@ -1,0 +1,17 @@
+pair<pair<ll,ll>,ll> gcdextented(ll a,ll b)
+{
+    if(b==0)
+    {
+        pair<pair<ll,ll>,ll> ans;
+        ans.second=a;
+        ans.first.first=1;
+        ans.first.second=0;
+        return ans;
+    }
+    pair<pair<ll,ll>,ll> temp=gcdextented(b,a%b);
+    pair<pair<ll,ll>,ll> ans;
+    ans.second=temp.second;
+    ans.first.first=temp.first.second;
+    ans.first.second=(temp.first.first-((a/b)*temp.first.second));
+    return ans;
+}

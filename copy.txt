@@ -1,0 +1,27 @@
+ w(x)
+    {
+        de(n);
+        vector<string>s;
+        map<ll,string>p;
+        re(i,n)
+        {
+            string k;
+            cin>>k;
+            s.pb(k);
+            p[i+1]=k;
+        }
+        de(q);
+        while(q--)
+        {
+            de(t);
+            if(t==1)
+            {
+                de(z);
+                char f;
+                cin>>f;
+                string h= p[z]+f;
+                cout<<h<<endl;
+                s.pb(h);
+                p[s.size()]=h;
+            }
+        }

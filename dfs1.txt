@@ -1,0 +1,12 @@
+void dfs(ll node,ll par = -1, ll level = 0) 
+{
+	lev[node] = level; 
+	ll cnt = 0; 
+	for(auto it : adj[node])
+	{
+		if(it==par) continue; 
+		dfs(it, node, level+1); 
+		cnt += dp[it]; 
+	}
+	dp[node] += (1+cnt);
+}

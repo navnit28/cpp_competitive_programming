@@ -1,0 +1,49 @@
+class graph{
+    list <ll> *l;
+    int v;
+    public:
+    graph(ll v)
+    {
+        this->v=v;
+        l=new list<ll>[v];
+    }
+    void add(ll x,ll y)
+    {
+        l[x].pb(y);
+        l[y].pb(x);
+    }
+    bool tree()
+    {
+        bool *visit=new bool[v];
+        ll *p=new ll[v];
+        queue <ll>q;
+        re(i,v)
+        {
+            visit[i]=false;
+            p[i]=i;
+        }
+        ll src=0;
+        q.push(src);
+        visit[src]=true;
+        while(!q.empty())
+        {
+            ll node=q.front();
+            q.pop();
+            for(auto nb:l[node])
+            {
+            if(visit[nb]==true && p[node]!=nb)
+            {
+                return false;
+            }
+            else if(!visit[nb])
+            {
+                visit[nb]=true;
+                p[nb]=node;       
+                q.push(nb);         
+            }
+            }
+        }
+        return true;
+    } 
+
+};

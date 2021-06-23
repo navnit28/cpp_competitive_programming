@@ -1,0 +1,12 @@
+vector<ll> index(ll a[], ll n){ 
+    vector<pair<ll, ll> > v; 
+    for (ll i = 0; i < n; ++i) { 
+        v.pb(mk(a[i], i)); 
+    } 
+    sort(all(v));
+    vector<ll> r;
+    for (ll i = 0; i < v.size(); i++) {  
+        r.pb(v[i].second);
+    }
+    return r;
+}

@@ -1,0 +1,109 @@
+#include<bits/stdc++.h>
+#define ss second
+#define ll long long 
+#define ff first
+#define w(x) ll x; cin>>x; while(x--)
+#define ps(x,y) fixed<<setprecision(y)<<x;
+#define fo(i, j, k, in) for (ll i=j ; i<k ; i+=in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) ll n;cin>>n;
+#define def(a,n) ll n;cin>>n;ll a[n];re(i,n){cin>>a[i];}
+#define defi(a,n,k) ll n;cin>>n; ll k;cin>>k;ll a[n];re(i,n){cin>>a[i];}
+#define deb(x) cout<<#x<<"="<<x<<endl;
+#define tr(it,a) for(auto it=a.begin();it!=a.end();it++)
+#define nl cout<<endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+    ios :: sync_with_stdio(false); cin.tie(0); cout.tie(0); 
+    #ifndef ONLINE_JUDGE  
+    freopen("input.txt", "r", stdin);  
+    freopen("output.txt", "w", stdout);
+#endif
+}
+int inp[100001];
+struct node{
+    int l,r;
+    int val;
+} segtree[100001];
+void build_segtree(int u,int l,int r)
+{
+    if(l==r)
+    {
+        segtree[u].val=inp[l];
+        segtree[u].l=l;
+        segtree[u].r=r;
+        return;
+    }
+    int m=(l+r)/2,l1=2*u,r1=2*u+1;
+    build_segtree(l1,l,m);
+    build_segtree(r1,m+1,r);
+    segtree[u].val=segtree[l1].val+segtree[r1].val;
+    segtree[u].l=l;
+    segtree[u].r=r;
+}
+int seg_query(int u,int l,int r)
+{
+    if(l<=segtree[u].l&&segtree[u].r<=r)
+    {
+        return segtree[u].val;
+    }
+    if(segtree[u].l>r||segtree[u].r<l)
+    return 0;
+    return seg_query(2*u,l,r)+seg_query(2*u+1,l,r);
+}
+void update_segtree(int u,int idx,int val)
+{
+    if(segtree[u].l<=idx && idx<=segtree[u].r)
+    {
+        if(segtree[u].l==segtree[u].r)
+        {
+            segtree[u].val+=val;
+            return;
+        }
+        else{
+            int lft=2*u,rgt=2*u+1;
+            update_segtree(2*u,idx,val);
+            update_segtree(2u+1,idx,val);
+            segtree[u].val=segtree[lft].val+segtree[rgt].val;
+        }
+    }
+    else
+    return;
+   // int m=(segtree[u].l+segtree[u].r)/2;
+
+}
+int main()
+{
+    cp();
+	//w(x)
+    de(n);
+    for(int i=1;i<=n;i++)
+    cin>>inp[i];
+    ll ji=1;
+    build_segtree(ji,ji,n);
+    de(q);
+    while(q--)
+    {
+        char e;
+        cin>>e;
+        if(e=='A')
+        {
+            de(l);
+            de(r);
+            ll ki=1;
+            ll ke=seg_query(ki,l,r);
+            cout<<ke<<endl;
+        }
+        if(e=='U')
+        {
+            int idx,val;
+            cin>>idx>>val;
+            update_segtree(1,idx,val);
+        }
+    }
+}

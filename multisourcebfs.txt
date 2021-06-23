@@ -1,0 +1,109 @@
+//NAVNIT28
+#include <bits/stdc++.h>
+#define ss second
+#define ll long long
+#define mod 1000000007
+#define ff first
+#define pb push_back
+#define pll pair<ll, ll>
+#define w(x)  \
+    ll x;     \
+    cin >> x; \
+    while (x--)
+#define ps(x, y) fixed << setprecision(y) << x;
+#define fo(i, j, k, in) for (ll i = j; i < k; i += in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) \
+    ll n;     \
+    cin >> n;
+#define def(a, n) \
+    ll n;         \
+    cin >> n;     \
+    ll a[n];      \
+    re(i, n) { cin >> a[i]; }
+#define defi(a, n, k) \
+    ll n;             \
+    cin >> n;         \
+    ll k;             \
+    cin >> k;         \
+    ll a[n];          \
+    re(i, n) { cin >> a[i]; }
+#define deb(x) cout << #x << "=" << x << endl;
+#define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
+#define nl cout << endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+    ios ::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+}
+//000012
+//001200
+//0->empty 1-ripe.2-rotten
+ll n,m;
+ll a[1000][1000];
+bool vis[1000][1000];
+bool valid(ll x,ll y)
+{
+    if(x<0||y<0||x>=n||y>=m||a[x][y]==0|| vis[x][y]==1)
+    {
+        return false;
+    }
+    return  true;
+}
+ll dx[]={1,0,-1,0};
+ll dy[]={0,1,0,-1};
+int main()
+{
+    cp();
+    cin>>n>>m;
+    re(i,n)
+    {
+        re(j,m)
+        {
+            cin>>a[i][j];
+        }
+    }
+    queue<array<ll,3>>q;
+    re(i,n)
+    {
+        re(j,m)
+        {
+            if(a[i][j]==2)
+            {
+                q.push({i,j,0});
+                vis[i][j]=1;
+            }
+        }
+    }
+    ll ans=0;
+    while(!q.empty())
+    {
+        ll x=q.front()[0];
+        ll y=q.front()[1];
+        ll dis=q.front()[2];
+        ans=max(ans,dis);
+        q.pop();
+        re(i,4)
+        {
+            ll X=x+dx[i];
+            ll Y=y+dy[i];
+            ll newdis=dis+1;
+            if(valid(X,Y))
+            {
+                vis[X][Y]=1;
+                q.push({X,Y,newdis});
+            }
+        }
+    }
+    cout<<ans;
+}

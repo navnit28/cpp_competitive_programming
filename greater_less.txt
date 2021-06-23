@@ -1,0 +1,6 @@
+ll get(ll ch,ll x) { // First greater than X
+    return *upper_bound(adj[ch].begin(),adj[ch].end(),x);
+}
+ll get2(ll ch,ll x) { // Last less than x
+    return *--lower_bound(adj[ch].begin(),adj[ch].end(),x);
+}

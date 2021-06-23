@@ -1,0 +1,10 @@
+bool searchiterative(node*head,ll key)
+{
+    while(head!=NULL)
+    {
+        if(head->data==key)
+        return true;
+        head=head->next;
+    }
+    return false;
+}

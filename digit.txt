@@ -1,0 +1,10 @@
+ll digit(ll n)
+{
+    ll q=0;
+    while(n>0)
+    {
+        q++;
+        n/=10;
+    }
+    return q; 
+}

@@ -1,0 +1,86 @@
+#include<bits/stdc++.h>
+#define ss second
+#define ll long long 
+#define ff first
+#define pll pair<ll,ll>
+#define w(x) ll x; cin>>x; while(x--)
+#define ps(x,y) fixed<<setprecision(y)<<x;
+#define fo(i, j, k, in) for (ll i=j ; i<k ; i+=in)
+#define re(i, j) fo(i, 0, j, 1)
+#define pi acos(-1)
+#define all(cont) cont.begin(), cont.end()
+#define countbit(x) __builtin_popcount(x)
+#define de(n) ll n;cin>>n;
+#define def(a,n) ll n;cin>>n;ll a[n];re(i,n){cin>>a[i];}
+#define defi(a,n,k) ll n;cin>>n; ll k;cin>>k;ll a[n];re(i,n){cin>>a[i];}
+#define deb(x) cout<<#x<<"="<<x<<endl;
+#define tr(it,a) for(auto it=a.begin();it!=a.end();it++)
+#define nl cout<<endl;
+using namespace std;
+//18-1326D1 1208B 845C 912B 1009B 1350C 20C 1333C 1234D 1327C 1305B 1304B (or in matrix) 1216-C(26) 21
+void cp()
+{
+    ios :: sync_with_stdio(false); cin.tie(0); cout.tie(0); 
+    #ifndef ONLINE_JUDGE  
+    freopen("input.txt", "r", stdin);  
+    freopen("output.txt", "w", stdout);
+#endif
+}
+ll dp [10][2][100][100];
+ll k;
+string s;
+string to_str(ll t) {
+  stringstream ss;
+  ss << t;
+  return ss.str();
+}
+ll solve(ll i,ll top,ll mod_sum,ll mod_product)
+{
+	if(i==s.size())
+	{
+		return ((mod_sum == 0) && (mod_product == 0));
+	}
+	if(dp[i][top][mod_sum][mod_product]!=-1)
+	return dp[i][top][mod_sum][mod_product];
+	ll ans=0;
+	ll jh=9;
+	ll ub=top ? (s[i]-'0'):jh;
+	for(ll j=0;j<=ub;j++)
+	{
+		ans+=solve(i+1,top&&(j==ub),(mod_sum+j)%k,((mod_product*10)%k+j)%k);
+	}
+	return dp[i][top][mod_sum][mod_product]=ans;
+}
+int main()
+{
+    cp();
+	de(t);
+	re(i,t)
+	{
+		cout<<"Case "<<i+1<<": ";
+		de(a);
+		de(b);
+		cin>>k;
+		a--;
+		ll ans=0;
+		if(k>99)
+		{
+			cout<<ans;
+			nl;
+		}
+		else
+		{
+		s=to_str(b);
+		ll f=0;
+		ll g=1;
+		memset(dp, -1, sizeof dp);
+		ans+=solve(f,g,f,f);
+		memset(dp, -1, sizeof dp);
+		s.clear();
+		s=to_str(a);
+		ans=ans-solve(f,g,f,f);
+		cout<<ans;
+		nl;
+		}
+	}
+}

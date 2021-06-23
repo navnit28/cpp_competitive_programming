@@ -1,0 +1,57 @@
+class graph
+{
+    unordered_map<T,list<pair<T,ll>>> m;
+public:
+void add(T u,T v,ll dis,bool bidir=true)
+{
+    m[u].pb(mk(v,dis));
+    if(bidir=true)
+    m[v].pb(mk(u,dis));
+}
+void dij(T src)
+{
+    unordered_map<T,ll> dist;
+    for(auto j:m)
+    {
+        dist[j.ff]=INT_MAX;
+    }
+    set<pair<ll,T>> s;
+    dist[src]=0;
+    ll kk=0;
+    s.insert(mk(kk,src));
+    while(!s.empty())
+    {
+        auto p=*(s.begin());
+        T node=p.ss;
+        ll distnode=p.ff;
+        s.erase(s.begin());
+        for(auto childpair:m[node])
+        {
+            if(distnode+childpair.ss<dist[childpair.ff])
+            {
+                T dest=childpair.ff;
+                auto f=s.find(mk(dist[dest],dest));
+                if(f!=s.end())
+                {
+                    s.erase(f);
+                }
+                dist[dest]=distnode+childpair.ss;
+                s.insert(mk(dist[dest],dest));
+            }
+        }
+    }
+    for(auto d:dist)
+    {
+        cout<<d.ff<<" is located at a distance of"<<d.ss<<endl;
+    }
+}
+};
+graph<string> india;
+    india.add("AMRITSAR","DELHI",1);
+    india.add("AMRITSAR","JAIPUR",4);
+    india.add("JAIPUR","DELHI",2);
+    india.add("JAIPUR","MUMBAI",8);
+    india.add("AGRA","BHOPAL",2);
+    india.add("MUMBAI","BHOPAL",3);
+    india.add("AGRA","DELHI",1);
+    india.dij("AMRITSAR");

@@ -1,0 +1,9 @@
+ll height(node*root){
+    if(root==NULL){
+        return 0;
+    }
+    ll ls = height(root->left);
+    ll rs = height(root->right);
+    return max(ls,rs) + 1;
+
+}
