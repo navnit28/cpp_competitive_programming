@@ -11,7 +11,8 @@
         "ASSG5_B190404CS_NAVNIT_1.C": "cpp",
         "ASSG6_B190404CS_NAVNIT_2.C": "cpp",
         "iomanip": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "type_traits": "cpp"
     },
     "python.pythonPath": "C:\\Python39\\python.exe",
     "cSpell.words": [

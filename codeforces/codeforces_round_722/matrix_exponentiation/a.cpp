@@ -88,23 +88,34 @@ Matrix pw(Matrix a,ll p)
 }
 void solve()
 {
-    ll n;
-    cin>>n;
-    Matrix m({
-        {0,1,1,1},
-        {1,0,1,1},
-        {1,1,0,1},
-        {1,1,1,0}
-    });
-    Matrix v({
-        {0},
-        {0},
-        {0},
-        {1}
-    });
-    Matrix result=pw(m,n)*v;
-    cout<<result.mat[3][0];
-
+    de(n);
+    de(m);
+    de(k);
+    vector<vector<ll>> ans(m,vector<ll>()); 
+    re(i,k)
+    {
+        ll e,r;
+        string s;
+        cin>>s;
+        if(s[0]>='a')
+        {
+            e=s[0]-'a';
+        }
+        else
+        {
+            r=s[0]-'A'+26;
+        }
+        if(s[1]>='a')
+        {
+            e=s[1]-'a';
+        }
+        else
+        {
+            r=s[1]-'A'+26;
+        }
+        cout<<e<<" "<<r;
+        nl;
+    }
 }
 int main()
 {
